@@ -1,0 +1,23 @@
+# Dependencies
+node_modules/
+backend/vendor/
+frontend/node_modules/
+
+# Environment files
+backend/.env
+frontend/.env.local
+
+# Databases & logs
+backend/storage/logs/
+backend/storage/framework/cache/
+backend/storage/framework/sessions/
+backend/storage/framework/views/
+*.log
+
+# Build outputs
+frontend/dist/
+frontend/.oxlintrc.json
+
+# OS files
+Thumbs.db
+.DS_Store

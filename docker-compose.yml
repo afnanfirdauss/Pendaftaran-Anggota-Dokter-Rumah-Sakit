@@ -1,0 +1,61 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: mediqueue_backend
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      APP_NAME: "MediQueue"
+      APP_ENV: "production"
+      APP_DEBUG: "false"
+      APP_URL: "http://localhost:8000"
+      DB_CONNECTION: "pgsql"
+      DB_HOST: "postgres"
+      DB_PORT: "5432"
+      DB_DATABASE: "mediqueue"
+      DB_USERNAME: "mediqueue_user"
+      DB_PASSWORD: "mediqueue_secret_password"
+    depends_on:
+      - postgres
+    networks:
+      - mediqueue_network
+
+  postgres:
+    image: postgres:16-alpine
+    container_name: mediqueue_postgres
+    restart: unless-stopped
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: "mediqueue"
+      POSTGRES_USER: "mediqueue_user"
+      POSTGRES_PASSWORD: "mediqueue_secret_password"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - mediqueue_network
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: mediqueue_frontend
+    restart: unless-stopped
+    ports:
+      - "5173:80"
+    depends_on:
+      - backend
+    networks:
+      - mediqueue_network
+
+networks:
+  mediqueue_network:
+    driver: bridge
+
+volumes:
+  postgres_data:
