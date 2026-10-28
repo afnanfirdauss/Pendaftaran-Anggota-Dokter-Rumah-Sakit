@@ -163,3 +163,5 @@ Konfigurasi file `docker-compose.yml`, `backend/Dockerfile`, dan koneksi Postgre
 
 ## 📄 Lisensi
 Proyek ini dibuat untuk keperluan portofolio pengembangan aplikasi web Full-Stack modern berstandar industri kesehatan.
+#   P e n d a f t a r a n - A n g g o t a - D o k t e r - R u m a h - S a k i t  
+ 
